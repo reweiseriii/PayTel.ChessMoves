@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayTel.ChessMoves.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayTel.ChessMoves.Console", "PayTell.ChessMoves.Console\PayTel.ChessMoves.Console.csproj", "{4E7EC44E-F0CB-41BF-9D53-6799BA2E260D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayTel.ChessMoves.API", "PayTell.ChessMoves.API\PayTel.ChessMoves.API.csproj", "{CCE628EC-E095-40BC-8B79-4988F42AACEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4E7EC44E-F0CB-41BF-9D53-6799BA2E260D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E7EC44E-F0CB-41BF-9D53-6799BA2E260D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E7EC44E-F0CB-41BF-9D53-6799BA2E260D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE628EC-E095-40BC-8B79-4988F42AACEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE628EC-E095-40BC-8B79-4988F42AACEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE628EC-E095-40BC-8B79-4988F42AACEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE628EC-E095-40BC-8B79-4988F42AACEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
