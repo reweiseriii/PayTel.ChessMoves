@@ -1,4 +1,4 @@
-﻿namespace PayTell.ChessMoves.Library.Entities
+﻿namespace PayTel.ChessMoves.Library.Entities
 {
     public class ChessCoordinatesEntity
     {
@@ -6,9 +6,9 @@
         public string Coordinate;
 
 
-        public ChessCoordinatesEntity(string v)
+        public ChessCoordinatesEntity(string chessCoordinate)
         {
-            this.Coordinate = v;
+            this.Coordinate = chessCoordinate;
         }
     }
 }

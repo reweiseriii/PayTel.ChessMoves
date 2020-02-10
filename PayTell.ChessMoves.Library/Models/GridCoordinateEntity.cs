@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayTell.ChessMoves.Library.Models
+namespace PayTel.ChessMoves.Library.Models
 {
     public class GridCoordinateEntity
     {
-        public int XCoodinate;
+        public int XCoordinate;
         public int YCoordinate;
     }
 }

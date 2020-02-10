@@ -1,4 +1,4 @@
-﻿namespace PayTell.ChessMoves.Library.Entities
+﻿namespace PayTel.ChessMoves.Library.Entities
 {
     public class DirectionTypeEntity
     {

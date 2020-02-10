@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
-using PayTell.ChessMoves.Library.Entities;
-using PayTell.ChessMoves.Library.Enums;
-using PayTell.ChessMoves.Library.Models;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using PayTel.ChessMoves.Library.Entities;
+using PayTel.ChessMoves.Library.Enums;
+using PayTel.ChessMoves.Library.Models;
 
-namespace PayTell.ChessMoves.Library.Lib
+namespace PayTel.ChessMoves.Library.Lib
 {
     public class ChessPieceLib
     {
@@ -11,10 +13,11 @@ namespace PayTell.ChessMoves.Library.Lib
         {
             var chestPieces = new List<ChessPiecesEntity>
             {
-                GetKing(), 
-                GetQueen(), 
-                GetRook(), 
-                GetBishop()
+                GetBishop(),
+                GetKing(),
+                GetQueen(),
+                GetRook()
+                
             };
 
             return chestPieces;
@@ -29,14 +32,14 @@ namespace PayTell.ChessMoves.Library.Lib
 
             var chessPiece = new ChessPiecesEntity
             {
-                PieceName = ChessPieceNamesEnum.Bishop.ToString(), 
+                PieceName = ChessPieceNamesEnum.Bishop.ToString(),
                 MaxMoves = 7,
-                DirectionTypeList = directionTypeList // Add the last property here
+                DirectionTypeList = directionTypeList,
+                GridCoordinateInstructionList = null
             };
 
-            // Create a method in this class to generate a list of coordinates that can be added
-            // to the gridcoordinatelist property
-
+            List<GridCoordinateEntity> gridCoordinateInstructionList = GetGridCoordinateInstructionList(chessPiece);
+            chessPiece.GridCoordinateInstructionList = gridCoordinateInstructionList;
             return chessPiece;
         }
 
@@ -54,6 +57,9 @@ namespace PayTell.ChessMoves.Library.Lib
                 MaxMoves = 7,
                 DirectionTypeList = directionTypeList
             };
+
+            List<GridCoordinateEntity> gridCoordinateInstructionList = GetGridCoordinateInstructionList(chessPiece);
+            chessPiece.GridCoordinateInstructionList = gridCoordinateInstructionList;
 
             return chessPiece;
         }
@@ -74,6 +80,9 @@ namespace PayTell.ChessMoves.Library.Lib
                 DirectionTypeList = directionTypeList
             };
 
+            List<GridCoordinateEntity> gridCoordinateInstructionList = GetGridCoordinateInstructionList(chessPiece);
+            chessPiece.GridCoordinateInstructionList = gridCoordinateInstructionList;
+
             return chessPiece;
         }
 
@@ -90,10 +99,118 @@ namespace PayTell.ChessMoves.Library.Lib
             {
                 PieceName = ChessPieceNamesEnum.King.ToString(),
                 MaxMoves = 1,
-                DirectionTypeList = directionTypeList
+                DirectionTypeList = directionTypeList,
+                GridCoordinateInstructionList = null
             };
+
+            List<GridCoordinateEntity> gridCoordinateInstructionList = GetGridCoordinateInstructionList(chessPiece);
+            chessPiece.GridCoordinateInstructionList = gridCoordinateInstructionList;
 
             return chessPiece;
         }
+
+        private List<GridCoordinateEntity> GetGridCoordinateInstructionList(ChessPiecesEntity chessPiece)
+        {
+            List<GridCoordinateEntity> coordinateList = new List<GridCoordinateEntity>();
+
+            foreach (var directionType in chessPiece.DirectionTypeList)
+            {
+                if (directionType.Direction == DirectionsEnum.Horizontal.ToString())
+                {
+                    coordinateList = GetCoordinateInstructionListForHorizontal(chessPiece,coordinateList);
+                }
+
+                if (directionType.Direction == DirectionsEnum.Vertical.ToString())
+                {
+                    coordinateList = GetCoordinateInstructionListForVertical(chessPiece,coordinateList);
+
+                }
+
+                if (directionType.Direction == DirectionsEnum.Diagonal.ToString())
+                {
+                    coordinateList = GetCoordinateInstructionListForDiagonal(chessPiece, coordinateList);
+
+                }
+            }
+
+            return coordinateList;
+        }
+
+        private List<GridCoordinateEntity> GetCoordinateInstructionListForDiagonal(ChessPiecesEntity chessPiece, 
+            List<GridCoordinateEntity> coordinateList)
+        {
+            //For Diagonal
+            var x = -(chessPiece.MaxMoves);
+            var y = (chessPiece.MaxMoves);
+
+            for (var i = -(chessPiece.MaxMoves); i <= chessPiece.MaxMoves; i++)
+            {
+                if (!(x == 0 && y == 0))
+                {
+                    coordinateList.Add(new GridCoordinateEntity {XCoordinate = x, YCoordinate = y});
+                }
+
+                x++;
+                y--;
+            }
+
+            x = -(chessPiece.MaxMoves);
+            y = -(chessPiece.MaxMoves);
+
+            for (var i = -(chessPiece.MaxMoves); i <= chessPiece.MaxMoves; i++)
+            {
+                if (!(x == 0 && y == 0))
+                {
+                    coordinateList.Add(new GridCoordinateEntity {XCoordinate = x, YCoordinate = y});
+                }
+
+                x++;
+                y++;
+            }
+
+            return coordinateList;
+        }
+
+        private List<GridCoordinateEntity> GetCoordinateInstructionListForVertical(ChessPiecesEntity chessPiece,
+            List<GridCoordinateEntity> coordinateList)
+        {
+            //For Vertical
+            var x = 0;
+            var y = -(chessPiece.MaxMoves);
+
+            for (var i = -(chessPiece.MaxMoves); i <= chessPiece.MaxMoves; i++)
+            {
+                if (!(x == 0 && y == 0))
+                {
+                    coordinateList.Add(new GridCoordinateEntity {XCoordinate = x, YCoordinate = y});
+                }
+
+                y++;
+            }
+
+            return coordinateList;
+
+        }
+
+        private List<GridCoordinateEntity> GetCoordinateInstructionListForHorizontal(ChessPiecesEntity chessPiece,
+            List<GridCoordinateEntity> coordinateList)
+        {
+            //For Horizontal
+            var x = -(chessPiece.MaxMoves);
+            var y = 0;
+
+            for (var i = -(chessPiece.MaxMoves); i <= chessPiece.MaxMoves; i++)
+            {
+                if (!(x == 0 && y==0))
+                {
+                    coordinateList.Add(new GridCoordinateEntity {XCoordinate = x, YCoordinate = y});
+                }
+                x++;
+            }
+
+            return coordinateList;
+        }
     }
+
+
 }

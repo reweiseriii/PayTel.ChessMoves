@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayTell.ChessMoves.Library.Enums
+namespace PayTel.ChessMoves.Library.Enums
 {
     public enum DirectionsEnum
     {

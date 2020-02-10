@@ -1,6 +1,6 @@
-﻿using PayTell.ChessMoves.Library.Models;
+﻿using PayTel.ChessMoves.Library.Models;
 
-namespace PayTell.ChessMoves.Library.Lib
+namespace PayTel.ChessMoves.Library.Lib
 {
     public class BoardLib
     {

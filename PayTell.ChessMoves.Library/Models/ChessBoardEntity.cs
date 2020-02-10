@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PayTell.ChessMoves.Library.Models
+namespace PayTel.ChessMoves.Library.Models
 {
     public class ChessBoardEntity
     {
